@@ -112,15 +112,15 @@ while run:
         counter2 += 1
     if minus2.draw_button():
         print('Player 2 - 1')
-        counter2 -= 1 
+        counter2 -= 1
     if test.draw_button():
         print('test')
 
     counter_img = font.render(str(counter), True, buttonColor)
     screen.blit(counter_img, (280, 450))
 
-    counter2_img = font.render(str(counter), True, buttonColor)
-    screen.blit(counter_img, (480, 450))
+    counter2_img = font.render(str(counter2), True, buttonColor)
+    screen.blit(counter2_img, (480, 450))
 
     for event in p.event.get():
         if event.type == p.QUIT:
