@@ -29,7 +29,6 @@ counter = 20
 counter2 = 20
 
 
-
 class button():
 
     #colors for button & text
@@ -73,24 +72,20 @@ class button():
         return action
 
 
-
 #buttons
 reset = button(100, 100, 'Reset')
 player1 = button(75, 200, 'Player 1')
 player2 = button(325, 200, 'Player 2')
-plus = button(75, 350, '+')
-minus = button(325, 350, '-')
-plus2 = button(175, 350, '+')
+plus = button(30, 300, '+')
+minus = button(175, 300, '-')
+plus2 = button(325, 350, '+')
 minus2 = button(425, 350, '-')
-
+startWith40 = button(50, 50, 'Start With 40 HP')
 
 
 run = True
 while run:
     screen.fill(bg)
-
-    
-
 
     if reset.draw_button():
         print('Resetting Game')
@@ -101,24 +96,36 @@ while run:
     if player2.draw_button():
         print('Player 2')
     if plus.draw_button():
-        print('Player 1 + 1')
+        print('Player 1 + 1HP')
         counter += 1
     if minus.draw_button():
-        print('Player 1 - 1')
+        print('Player 1 - 1HP')
         counter -= 1
     if plus2.draw_button():
-        print('Player 2 + 1')
+        print('Player 2 + 1HP')
         counter2 += 1
     if minus2.draw_button():
-        print('Player 2 - 1')
+        print('Player 2 - 1HP')
         counter2 -= 1
+    if startWith40.draw_button():
+        print('Starting game with 40 HP')
+        counter = counter2 = 40
 
-
+    #life counter for player 1
     counter_img = font.render(str(counter), True, buttonColor)
-    screen.blit(counter_img, (280, 450))
+    screen.blit(counter_img, (130, 450))
 
+    #life counter for player 2
     counter2_img = font.render(str(counter2), True, buttonColor)
-    screen.blit(counter2_img, (480, 450))
+    screen.blit(counter2_img, (430, 450))
+
+    #stop game when a player wins 
+    if counter <= 0:
+        print('Player 2 Wins!')
+        break
+    elif counter2 <= 0:
+        print('Player 1 Wins!')
+        break
 
     for event in p.event.get():
         if event.type == p.QUIT:
