@@ -25,8 +25,8 @@ text = font.render('Magic The Gathering Life Counter', False, buttonColor)
 
 #global variables
 clicked = False
-counter = 0
-counter2 = 0
+counter = 20
+counter2 = 20
 
 
 
@@ -83,7 +83,6 @@ minus = button(325, 350, '-')
 plus2 = button(175, 350, '+')
 minus2 = button(425, 350, '-')
 
-test = button(10, 10, '')
 
 
 run = True
@@ -95,8 +94,8 @@ while run:
 
     if reset.draw_button():
         print('Resetting Game')
-        counter = 0
-        counter2 = 0
+        counter = 20
+        counter2 = 20
     if player1.draw_button():
         print('Player 1')
     if player2.draw_button():
@@ -113,8 +112,7 @@ while run:
     if minus2.draw_button():
         print('Player 2 - 1')
         counter2 -= 1
-    if test.draw_button():
-        print('test')
+
 
     counter_img = font.render(str(counter), True, buttonColor)
     screen.blit(counter_img, (280, 450))
