@@ -19,9 +19,14 @@ buttonColor = (110, 7, 0)
 hoverColor = (63, 35, 186)
 clickColor = (10, 0, 56)
 
+#text
+text = font.render('Magic The Gathering Life Counter', False, buttonColor)
+
+
 #global variables
 clicked = False
 counter = 0
+counter2 = 0
 
 
 
@@ -61,17 +66,12 @@ class button():
         else:
             p.draw.rect(screen, self.button_color, button_rect)
 
-        #add shading to button
-        p.draw.line(screen, white, (self.x, self.y), (self.x + self.width, self.y), 2)
-        p.draw.line(screen, white, (self.x, self.y), (self.x + self.y, self.height), 2)
-        p.draw.line(screen, black, (self.x, self.y + self.height), (self.x + self.width, self.y + self.height), 2)
-        p.draw.line(screen, black, (self.x + self.width, self.y), (self.x + self.width, self.y + self.height), 2)
-
         #add text to button
         text_img = font.render(self.text, True, self.text_color)
         text_len = text_img.get_width()
         screen.blit(text_img, (self.x + int(self.width / 2) - int(text_len / 2), self.y + 25))
         return action
+
 
 
 #buttons
@@ -80,28 +80,47 @@ player1 = button(75, 200, 'Player 1')
 player2 = button(325, 200, 'Player 2')
 plus = button(75, 350, '+')
 minus = button(325, 350, '-')
+plus2 = button(175, 350, '+')
+minus2 = button(425, 350, '-')
+
+test = button(10, 10, '')
 
 
 run = True
 while run:
     screen.fill(bg)
 
+    
+
+
     if reset.draw_button():
         print('Resetting Game')
-        counter = 0 
+        counter = 0
+        counter2 = 0
     if player1.draw_button():
         print('Player 1')
     if player2.draw_button():
         print('Player 2')
     if plus.draw_button():
-        print('+ 1')
+        print('Player 1 + 1')
         counter += 1
     if minus.draw_button():
-        print('- 1')
+        print('Player 1 - 1')
         counter -= 1
+    if plus2.draw_button():
+        print('Player 2 + 1')
+        counter2 += 1
+    if minus2.draw_button():
+        print('Player 2 - 1')
+        counter2 -= 1 
+    if test.draw_button():
+        print('test')
 
     counter_img = font.render(str(counter), True, buttonColor)
     screen.blit(counter_img, (280, 450))
+
+    counter2_img = font.render(str(counter), True, buttonColor)
+    screen.blit(counter_img, (480, 450))
 
     for event in p.event.get():
         if event.type == p.QUIT:
