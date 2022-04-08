@@ -9,7 +9,10 @@ HEIGHT = WIDTH = 600
 screen = p.display.set_mode((HEIGHT, WIDTH))
 p.display.set_caption("Magic The Gathering Life Counter")
 
-font = p.font.SysFont('Arial', 30)
+font = p.font.SysFont('Arial', 24)
+
+image = p.image.load(r'C:\Users\mkhou\OneDrive\Desktop\magic-the-gathering-life-counter\images\logo.png')
+
 
 #colors
 bg = (130, 131, 130) #background color (grey)
@@ -19,8 +22,6 @@ buttonColor = (110, 7, 0)
 hoverColor = (63, 35, 186)
 clickColor = (10, 0, 56)
 
-#text
-text = font.render('Magic The Gathering Life Counter', False, buttonColor)
 
 
 #global variables
@@ -36,8 +37,8 @@ class button():
     hover_color = hoverColor
     click_color = clickColor
     text_color = black
-    width = 180
-    height = 70
+    width = 120
+    height = 50
 
     def __init__(self, x, y, text):
         self.x = x
@@ -68,24 +69,28 @@ class button():
         #add text to button
         text_img = font.render(self.text, True, self.text_color)
         text_len = text_img.get_width()
-        screen.blit(text_img, (self.x + int(self.width / 2) - int(text_len / 2), self.y + 25))
+        screen.blit(text_img, (self.x + int(self.width / 2) - int(text_len / 2), self.y + 10))
         return action
 
 
 #buttons
-reset = button(100, 100, 'Reset')
-player1 = button(75, 200, 'Player 1')
-player2 = button(325, 200, 'Player 2')
-plus = button(30, 300, '+')
-minus = button(175, 300, '-')
-plus2 = button(325, 350, '+')
-minus2 = button(425, 350, '-')
-startWith40 = button(50, 50, 'Start With 40 HP')
+reset = button(50, 450, 'Reset')
+startWith40 = button(50, 510, 'Start With 40')
+player1 = button(75, 220, 'Player 1')
+player2 = button(375, 220, 'Player 2')
+plus = button(30, 280, '+')
+minus = button(155, 280, '-')
+plus2 = button(325, 280, '+')
+minus2 = button(450, 280, '-')
+
 
 
 run = True
 while run:
     screen.fill(bg)
+
+    screen.blit(image, (0,0))
+
 
     if reset.draw_button():
         print('Resetting Game')
@@ -108,24 +113,24 @@ while run:
         print('Player 2 - 1HP')
         counter2 -= 1
     if startWith40.draw_button():
-        print('Starting game with 40 HP')
+        print('Starting game with 40')
         counter = counter2 = 40
 
     #life counter for player 1
     counter_img = font.render(str(counter), True, buttonColor)
-    screen.blit(counter_img, (130, 450))
+    screen.blit(counter_img, (130, 350))
 
     #life counter for player 2
     counter2_img = font.render(str(counter2), True, buttonColor)
-    screen.blit(counter2_img, (430, 450))
+    screen.blit(counter2_img, (430, 350))
 
-    #stop game when a player wins 
+    #stop game when a player wins
     if counter <= 0:
         print('Player 2 Wins!')
-        break
     elif counter2 <= 0:
         print('Player 1 Wins!')
-        break
+
+
 
     for event in p.event.get():
         if event.type == p.QUIT:

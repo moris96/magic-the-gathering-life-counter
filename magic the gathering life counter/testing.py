@@ -1,5 +1,4 @@
-
-#when rolling a dice (numbers 1-6)
+#when rolling a dice (numbers 1-20) 20 is max dice value for magic the gathering
 import random
 
 def rollDice(min, max):
@@ -7,8 +6,6 @@ def rollDice(min, max):
         print("Roling dice...")
         number = random.randint(min,max)
         print(f"Your number: {number}")
-        choice = input("Do you want to roll the dice again? (y/n)")
-        if choice.lower() == 'n':
-            break
+        break
 
-rollDice(1,6)
+rollDice(1,20)
